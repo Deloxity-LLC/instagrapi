@@ -20,6 +20,14 @@ RUN pip install --no-cache-dir fastapi uvicorn[standard] python-multipart
 # Copy the entire instagrapi library
 COPY . .
 
+# Accept build arguments for Instagram credentials
+ARG INSTAGRAM_USERNAME
+ARG INSTAGRAM_PASSWORD
+
+# Set them as environment variables for runtime
+ENV INSTAGRAM_USERNAME=$INSTAGRAM_USERNAME
+ENV INSTAGRAM_PASSWORD=$INSTAGRAM_PASSWORD
+
 # Expose port
 EXPOSE 8000
 
