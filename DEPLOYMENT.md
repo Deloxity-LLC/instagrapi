@@ -26,8 +26,14 @@ Gehe zu deiner Dokploy-Instanz
 - **Dockerfile**: `Dockerfile` (wird automatisch erkannt)
 - **Port**: `8000`
 
-#### 5. Environment Variables (Optional)
-Keine zwingend erforderlich für den Start.
+#### 5. Environment Variables (WICHTIG!)
+
+Für öffentliche Endpoints (ohne Login):
+
+- **INSTAGRAM_USERNAME**: Dein Instagram Bot-Account Username
+- **INSTAGRAM_PASSWORD**: Dein Instagram Bot-Account Passwort
+
+**Hinweis**: Wenn du diese nicht setzt, funktionieren nur die Endpoints, die eine explizite Session erfordern.
 
 #### 6. Deploy
 - Klicke auf **Save**
@@ -39,7 +45,66 @@ Die API wird verfügbar sein unter:
 - **API Docs (Swagger)**: `http://deine-domain:8000/docs`
 - **Health Check**: `http://deine-domain:8000/health`
 
-### API Endpoints
+## API Endpoints
+
+### Öffentliche Endpoints (kein Login erforderlich)
+
+Diese Endpoints nutzen den System-Account, der beim Start eingeloggt wird.
+
+#### User Profil abrufen (öffentlich)
+
+```bash
+GET /public/user/{username}
+
+# Beispiel:
+curl http://deine-domain:8000/public/user/instagram
+```
+
+Antwort:
+```json
+{
+  "status": "success",
+  "user": {
+    "pk": "123456789",
+    "username": "instagram",
+    "full_name": "Instagram",
+    "biography": "Bio...",
+    "follower_count": 1000000,
+    "following_count": 100,
+    "media_count": 500,
+    "is_private": false,
+    "is_verified": true,
+    "profile_pic_url": "https://...",
+    "external_url": "https://...",
+    "is_business": true
+  }
+}
+```
+
+#### User Medias abrufen (öffentlich)
+
+```bash
+GET /public/user/{username}/medias?amount=20
+
+# Beispiel:
+curl http://deine-domain:8000/public/user/instagram/medias?amount=10
+```
+
+#### Media Info abrufen (öffentlich)
+
+```bash
+GET /public/media/{media_id_or_shortcode}
+
+# Beispiel mit Shortcode:
+curl http://deine-domain:8000/public/media/CGgDsi7JQdS
+
+# Beispiel mit Media ID:
+curl http://deine-domain:8000/public/media/123456789
+```
+
+### Private Endpoints (Login erforderlich)
+
+Diese Endpoints erfordern eine Session ID vom Login.
 
 #### Authentifizierung
 ```bash
