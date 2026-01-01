@@ -60,8 +60,29 @@ async def startup_event():
         try:
             logger.info("Initializing system client for public endpoints...")
             system_client = Client()
-            system_client.login(instagram_username, instagram_password)
-            logger.info(f"System client logged in successfully as {instagram_username}")
+
+            # Try to load existing session first
+            session_file = "/app/session.json"
+            if os.path.exists(session_file):
+                try:
+                    logger.info("Loading existing session from file...")
+                    system_client.load_settings(session_file)
+                    system_client.login(instagram_username, instagram_password)
+                    logger.info(f"System client logged in successfully using saved session as {instagram_username}")
+                except Exception as e:
+                    logger.warning(f"Failed to load saved session: {str(e)}")
+                    logger.info("Attempting fresh login...")
+                    system_client = Client()
+                    system_client.login(instagram_username, instagram_password)
+                    system_client.dump_settings(session_file)
+                    logger.info(f"System client logged in successfully and session saved as {instagram_username}")
+            else:
+                # Fresh login
+                logger.info("No saved session found, performing fresh login...")
+                system_client.login(instagram_username, instagram_password)
+                system_client.dump_settings(session_file)
+                logger.info(f"System client logged in successfully and session saved as {instagram_username}")
+
         except Exception as e:
             logger.error(f"Failed to login system client: {str(e)}")
             logger.warning("Public endpoints will not be available without system client")
