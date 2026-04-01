@@ -18,12 +18,34 @@ The instagrapi more suits for testing or research than a working business!
 
 ### We recommend using our services:
 
+* [VirtualWallet](https://virtallet.com/) Free crypto calculator — track all your assets in one place
 * [Cloqly](https://cloqly.com/register?ref=58dbf70f) for Rotating Proxies 🔒
 * [HikerAPI](https://hikerapi.com/p/bkXQlaVe) for Instagram API ⚡⚡⚡
 * [DataLikers](https://datalikers.com/p/S9Lv5vBy) for Instagram Datasets, MCP and CacheAPI 🚀
 * [LamaTok](https://lamatok.com/p/B9ScEYIQ) for TikTok API 🔥
 * [InstaSurfBot](https://t.me/InstaSurfBot) telegram bot for downloading medias from Instagram ❤️
 * [OSINTagramBot](https://t.me/OSINTagramBot) telegram bot for OSINT on Instagram 🕵️‍♂️
+
+
+### 💰 [HikerAPI Affiliate Program](https://hikerapi.com/help/affiliate) — Up to 50% Commission!
+
+Refer users to HikerAPI and earn a percentage of their API spending:
+
+| Plan | Commission |
+|------|------------|
+| Start ($0.02/req) | **50%** |
+| Standard ($0.001/req) | **25%** |
+| Business ($0.00069/req) | **15%** |
+| Ultra ($0.0006/req) | **10%** |
+
+**How it works:**
+1. Create your promo code in the [dashboard](https://hikerapi.com/affiliate)
+2. Share it with your audience (in your GitHub repositories)
+3. Earn commission on every request they make
+
+**Payouts:** USDT (TRC-20 or ERC-20), minimum $500
+
+------
 
 [![Package](https://github.com/subzeroid/instagrapi/actions/workflows/python-package.yml/badge.svg?branch=master&1)](https://github.com/subzeroid/instagrapi/actions/workflows/python-package.yml)
 [![PyPI](https://img.shields.io/pypi/v/instagrapi)](https://pypi.org/project/instagrapi/)
@@ -134,9 +156,9 @@ posts = cl.user_medias(target_id, amount=10)
 for media in posts:
     # download photos to the current folder
     cl.photo_download(media.pk)
-
-See [examples/session_login.py](examples/session_login.py) for a standalone script demonstrating these login methods.
 ```
+See [examples/session_login.py](examples/session_login.py) for a standalone script demonstrating these login methods.
+
 
 <details>
     <summary>Additional example</summary>
